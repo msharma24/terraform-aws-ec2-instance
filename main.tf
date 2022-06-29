@@ -114,6 +114,15 @@ resource "aws_instance" "this" {
     }
   }
 
+  dynamic "private_dns_name_options" {
+    for_each = var.private_dns_name_options != null ? [var.private_dns_name_options] : []
+    content {
+      enable_resource_name_dns_aaaa_record = lookup(var.private_dns_name_options, "enable_resource_name_dns_aaaa_record", null)
+      enable_resource_name_dns_a_record    = lookup(var.private_dns_name_options, "enable_resource_name_dns_a_record", null)
+      hostname_type                        = lookup(var.private_dns_name_options, "hostname_type", null)
+    }
+  }
+
   enclave_options {
     enabled = var.enclave_options_enabled
   }

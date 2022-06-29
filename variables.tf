@@ -130,6 +130,13 @@ variable "launch_template" {
   default     = null
 }
 
+variable "private_dns_name_options" {
+  description = "The options for the instance hostname. The default values are inherited from the subnet"
+  type        = map(string)
+  default     = null
+
+}
+
 variable "metadata_options" {
   description = "Customize the metadata options of the instance"
   type        = map(string)
